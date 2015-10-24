@@ -8,10 +8,10 @@ OBJS=$(C_SRCS:./%.c=build/%.o)
 # Clean and compile .so
 all: build/libcommons.so
 
-create-dirs:
+build/commons/collections:
 	mkdir -p build/commons/collections
 
-build/libcommons.so: create-dirs $(OBJS)
+build/libcommons.so: build/commons/collections/ $(OBJS)
 	$(CC) -shared -o "build/libcommons.so" $(OBJS)
 
 build/commons/%.o: commons/%.c
@@ -36,4 +36,4 @@ uninstall:
 	rm -f /usr/lib/libcommons.so
 	rm -rf /usr/include/commons
 
-.PHONY: all create-dirs clean install uninstall
+.PHONY: all clean install uninstall

@@ -7,10 +7,10 @@ OBJS=build/main.o
 
 all: build/commons-integration-test-logger
 
-create-dirs:
+build:
 	mkdir -p build/.
 
-build/commons-integration-test-logger: dependents create-dirs $(OBJS)
+build/commons-integration-test-logger: dependents build/ $(OBJS)
 	$(CC) -L"../../../src/build" -o "build/commons-integration-test-logger" $(OBJS) -lcommons -lpthread
 
 build/%.o: ./%.c
@@ -25,4 +25,4 @@ clean:
 dependents:
 	-cd ../../../src/ && $(MAKE) all
 
-.PHONY: all create-dirs clean
+.PHONY: all clean

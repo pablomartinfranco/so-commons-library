@@ -9,10 +9,10 @@ OBJS=$(C_SRCS:./%.c=build/%.o)
 
 all: build/commons-unit-test
 
-create-dirs:
+build:
 	mkdir -p build
 
-build/commons-unit-test: dependents create-dirs $(OBJS)
+build/commons-unit-test: dependents build/ $(OBJS)
 	$(CC) -L"../../src/build" -L"$(C_SPEC_BIN)" -o "build/commons-unit-test" $(OBJS) -lcommons -lcspecs
 
 build/%.o: ./%.c
@@ -34,4 +34,4 @@ install-cspec:
 	-cd ../../ && git submodule init && git submodule update
 	-cd ../../cspec && $(MAKE) all
 
-.PHONY: all create-dirs clean install-cspec
+.PHONY: all clean install-cspec
